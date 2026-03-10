@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hermes API - Amazon Intelligence at API Speed</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0f1e;
+      --bg-secondary: #111827;
+      --bg-card: #1f2937;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --text-primary: #f9fafb;
+      --text-muted: #9ca3af;
+      --border: #374151;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+    h1, h2, h3, .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .glass {
+      background: rgba(31, 41, 55, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .code-block {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 0.75rem;
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">⚡</span>
+          <span class="font-display font-bold text-xl">Hermes API</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#features" class="text-gray-400 hover:text-white transition">Features</a>
+          <a href="#pricing" class="text-gray-400 hover:text-white transition">Pricing</a>
+          <a href="#docs" class="text-gray-400 hover:text-white transition">Docs</a>
+          <button onclick="toggleLang()" class="px-3 py-1 rounded-full border border-gray-600 text-sm hover:border-blue-500 transition">
+            <span data-en="EN / 中文" data-zh="EN / 中文">EN / 中文</span>
+          </button>
+          <a href="#" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium transition">Get API Key</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 px-4">
+    <div class="max-w-5xl mx-auto text-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+        <span data-en="Amazon Product Research API for Builders" data-zh="为开发者打造的 Amazon 商品研究 API">Amazon Product Research API for Builders</span>
+      </h1>
+      <p class="text-xl text-gray-400 mb-8 max-w-3xl mx-auto">
+        <span data-en="Real-time market intelligence, competitor analysis, and review insights — all via a single REST API." data-zh="实时市场数据、竞品分析、评论洞察 — 一个 REST API 全搞定">Real-time market intelligence, competitor analysis, and review insights — all via a single REST API.</span>
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <a href="#" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold text-lg transition">
+          <span data-en="Start Free Trial" data-zh="免费试用">Start Free Trial</span>
+        </a>
+        <a href="#docs" class="border border-gray-600 hover:border-blue-500 px-8 py-3 rounded-lg font-semibold text-lg transition">
+          <span data-en="View API Docs →" data-zh="查看 API 文档 →">View API Docs →</span>
+        </a>
+      </div>
+      
+      <!-- Code Block -->
+      <div class="code-block p-6 max-w-2xl mx-auto text-left overflow-x-auto">
+        <pre class="text-sm text-gray-300"><code>curl -X POST "https://hermes.spider.yesy.dev/openapi/v1/markets/search" \
+  -H "Authorization: Bearer YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"dateRange":"30d","sampleType":"by_sale_100"}'</code></pre>
+      </div>
+      
+      <!-- Stats -->
+      <div class="flex flex-wrap justify-center gap-8 mt-12 text-gray-400">
+        <span class="flex items-center gap-2"><i data-lucide="zap" class="w-4 h-4 text-blue-500"></i> 14 Endpoints</span>
+        <span class="flex items-center gap-2"><i data-lucide="gauge" class="w-4 h-4 text-blue-500"></i> 100 req/min</span>
+        <span class="flex items-center gap-2"><i data-lucide="activity" class="w-4 h-4 text-blue-500"></i> Real-time Data</span>
+        <span class="flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-blue-500"></i> Amazon US Market</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 px-4 bg-gray-900/50">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+        <span data-en="Core Capabilities" data-zh="核心能力">Core Capabilities</span>
+      </h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="glass rounded-xl p-6 card-hover">
+          <div class="text-4xl mb-4">📊</div>
+          <h3 class="text-xl font-semibold mb-2" data-en="Deep Market Analysis" data-zh="深度市场分析">Deep Market Analysis</h3>
+          <p class="text-gray-400 text-sm mb-4" data-en="Search any Amazon category and get aggregated metrics: demand volume, average price, gross margin, competition density, FBA rate, brand concentration, and new product trends." data-zh="搜索任意 Amazon 类目，获取需求量、均价、毛利率、竞争密度、FBA占比、品牌集中度等全量市场指标。">Search any Amazon category and get aggregated metrics: demand volume, average price, gross margin, competition density, FBA rate, brand concentration, and new product trends.</p>
+          <span class="inline-block bg-blue-900/50 text-blue-400 text-xs px-3 py-1 rounded-full">POST /markets/search</span>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="glass rounded-xl p-6 card-hover">
+          <div class="text-4xl mb-4">🛍️</div>
+          <h3 class="text-xl font-semibold mb-2" data-en="Massive Product Database" data-zh="海量产品数据库">Massive Product Database</h3>
+          <p class="text-gray-400 text-sm mb-4" data-en="Search, filter, and batch-lookup millions of Amazon products. Access BSR, ratings, price, dimensions, seller info and more." data-zh="搜索、筛选、批量查询数百万 Amazon 商品，获取 BSR、评分、价格、尺寸、卖家信息等完整数据。">Search, filter, and batch-lookup millions of Amazon products. Access BSR, ratings, price, dimensions, seller info and more.</p>
+          <span class="inline-block bg-blue-900/50 text-blue-400 text-xs px-3 py-1 rounded-full">POST /products/search • /batch</span>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glass rounded-xl p-6 card-hover">
+          <div class="text-4xl mb-4">🔍</div>
+          <h3 class="text-xl font-semibold mb-2" data-en="Competitor Lookup" data-zh="竞品情报">Competitor Lookup</h3>
+          <p class="text-gray-400 text-sm mb-4" data-en="Find competitor products by keyword, brand, ASIN, or category. Understand who you're competing against and how to differentiate." data-zh="通过关键词、品牌、ASIN 或类目找到竞争对手，洞察竞争格局，寻找差异化机会。">Find competitor products by keyword, brand, ASIN, or category. Understand who you're competing against and how to differentiate.</p>
+          <span class="inline-block bg-blue-900/50 text-blue-400 text-xs px-3 py-1 rounded-full">POST /products/competitor-lookup</span>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="glass rounded-xl p-6 card-hover">
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="text-xl font-semibold mb-2" data-en="Live Amazon Data" data-zh="实时 Amazon 数据">Live Amazon Data</h3>
+          <p class="text-gray-400 text-sm mb-4" data-en="Get real-time product details, bestseller lists, search results, and reviews scraped directly from Amazon. No cache, no delays." data-zh="直接从 Amazon 实时抓取产品详情、畅销榜、搜索结果和评论，无缓存，无延迟。">Get real-time product details, bestseller lists, search results, and reviews scraped directly from Amazon. No cache, no delays.</p>
+          <span class="inline-block bg-blue-900/50 text-blue-400 text-xs px-3 py-1 rounded-full">POST /realtime/product • /bestsellers</span>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="glass rounded-xl p-6 card-hover">
+          <div class="text-4xl mb-4">💬</div>
+          <h3 class="text-xl font-semibold mb-2" data-en="AI Review Intelligence" data-zh="AI 评论分析">AI Review Intelligence</h3>
+          <p class="text-gray-400 text-sm mb-4" data-en="Analyze hundreds of reviews in seconds. Get sentiment analysis, rating distribution, and actionable consumer insights to improve your products." data-zh="秒级分析数百条评论，获取情感倾向、评分分布和消费者洞察，助力产品优化。">Analyze hundreds of reviews in seconds. Get sentiment analysis, rating distribution, and actionable consumer insights to improve your products.</p>
+          <span class="inline-block bg-blue-900/50 text-blue-400 text-xs px-3 py-1 rounded-full">POST /reviews/analyze</span>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="glass rounded-xl p-6 card-hover">
+          <div class="text-4xl mb-4">👗</div>
+          <h3 class="text-xl font-semibold mb-2" data-en="Apparel Tag Extraction" data-zh="服饰标签提取">Apparel Tag Extraction</h3>
+          <p class="text-gray-400 text-sm mb-4" data-en="Specialized tag extraction for fashion products — automatically identify style, material, fit, occasion and other attributes from any clothing ASIN." data-zh="服装品类专项标签提取，自动识别风格、材质、版型、场合等属性，让选品更精准。">Specialized tag extraction for fashion products — automatically identify style, material, fit, occasion and other attributes from any clothing ASIN.</p>
+          <span class="inline-block bg-blue-900/50 text-blue-400 text-xs px-3 py-1 rounded-full">POST /products/tags</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API Reference -->
+  <section id="docs" class="py-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+        <span data-en="API Endpoints" data-zh="API 端点">API Endpoints</span>
+      </h2>
+      
+      <div class="glass rounded-xl overflow-hidden">
+        <div class="grid md:grid-cols-2 gap-0">
+          <div class="p-6 border-b md:border-b-0 md:border-r border-gray-700">
+            <h4 class="text-blue-400 font-semibold mb-4">Markets</h4>
+            <div class="space-y-2 text-sm">
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/markets/search</code></div>
+            </div>
+          </div>
+          <div class="p-6 border-b border-gray-700">
+            <h4 class="text-blue-400 font-semibold mb-4">Products</h4>
+            <div class="space-y-2 text-sm">
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/products/search</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/products/detail</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/products/batch</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/products/categories</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/products/competitor-lookup</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/products/tags</code></div>
+            </div>
+          </div>
+          <div class="p-6 border-b md:border-b-0 md:border-r border-gray-700">
+            <h4 class="text-blue-400 font-semibold mb-4">Realtime</h4>
+            <div class="space-y-2 text-sm">
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/realtime/search</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/realtime/product</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/realtime/reviews</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/realtime/bestsellers</code></div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h4 class="text-blue-400 font-semibold mb-4">Reviews & System</h4>
+            <div class="space-y-2 text-sm">
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/reviews/analyze</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/system/health</code></div>
+              <div class="flex items-center gap-2"><span class="text-green-400">POST</span> <code>/system/usage</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 px-4 bg-gray-900/50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+        <span data-en="Pricing Plans" data-zh="定价方案">Pricing Plans</span>
+      </h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Starter -->
+        <div class="glass rounded-xl p-8">
+          <h3 class="text-xl font-semibold mb-2">Starter</h3>
+          <div class="text-4xl font-bold mb-6">Free</div>
+          <ul class="space-y-3 text-gray-400 text-sm mb-8">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> 1,000 API calls/month</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Product Search & Detail</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Basic market data</li>
+          </ul>
+          <button class="w-full border border-gray-600 hover:border-blue-500 py-3 rounded-lg font-medium transition">
+            <span data-en="Start Free" data-zh="免费开始">Start Free</span>
+          </button>
+        </div>
+
+        <!-- Pro -->
+        <div class="glass rounded-xl p-8 border-2 border-blue-500 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-xs px-3 py-1 rounded-full font-medium">
+            <span data-en="Most Popular" data-zh="最受欢迎">Most Popular</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Pro</h3>
+          <div class="text-4xl font-bold mb-6">$49<span class="text-lg text-gray-400">/mo</span></div>
+          <ul class="space-y-3 text-gray-400 text-sm mb-8">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> 50,000 API calls/month</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> All 14 endpoints</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Real-time data access</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Review AI analysis</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Priority support</li>
+          </ul>
+          <button class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-medium transition">
+            <span data-en="Start Pro Trial" data-zh="开始 Pro 试用">Start Pro Trial</span>
+          </button>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="glass rounded-xl p-8">
+          <h3 class="text-xl font-semibold mb-2">Enterprise</h3>
+          <div class="text-4xl font-bold mb-6">Custom</div>
+          <ul class="space-y-3 text-gray-400 text-sm mb-8">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Unlimited calls</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> SLA guarantee</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Dedicated support</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Custom integrations</li>
+          </ul>
+          <button class="w-full border border-gray-600 hover:border-blue-500 py-3 rounded-lg font-medium transition">
+            <span data-en="Contact Sales" data-zh="联系销售">Contact Sales</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Start -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-12">
+        <span data-en="Quick Start" data-zh="快速开始">Quick Start</span>
+      </h2>
+      
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="glass rounded-xl p-6">
+          <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+          <p class="text-gray-400 text-sm" data-en="Get your API key from account settings" data-zh="从账户设置获取 API Key">Get your API key from account settings</p>
+        </div>
+        <div class="glass rounded-xl p-6">
+          <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+          <p class="text-gray-400 text-sm" data-en="Add Authorization header to requests" data-zh="在请求头中添加 Authorization">Add Authorization header to requests</p>
+        </div>
+        <div class="glass rounded-xl p-6">
+          <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+          <p class="text-gray-400 text-sm" data-en="POST to any endpoint with JSON body" data-zh="向任意端点发送 POST 请求">POST to any endpoint with JSON body</p>
+        </div>
+        <div class="glass rounded-xl p-6">
+          <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">4</div>
+          <p class="text-gray-400 text-sm" data-en="Get structured JSON response" data-zh="获取结构化 JSON 响应">Get structured JSON response</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 px-4 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">⚡</span>
+          <span class="font-display font-bold text-xl">Hermes API</span>
+          <span class="text-gray-500">— Amazon Intelligence at API Speed</span>
+        </div>
+        <div class="flex gap-6 text-gray-400 text-sm">
+          <a href="#" class="hover:text-white transition">Docs</a>
+          <a href="#" class="hover:text-white transition">Pricing</a>
+          <a href="#" class="hover:text-white transition">API Reference</a>
+          <a href="#" class="hover:text-white transition">Status</a>
+        </div>
+      </div>
+      <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+        © 2025 Hermes API · Powered by yesy.dev
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+    
+    // Language toggle
+    let currentLang = 'en';
+    function toggleLang() {
+      currentLang = currentLang === 'en' ? 'zh' : 'en';
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currentLang);
+      });
+    }
+    
+    // Fade in animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
